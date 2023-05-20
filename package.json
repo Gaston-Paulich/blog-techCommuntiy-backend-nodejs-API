@@ -4,7 +4,7 @@
   "description": "Backend del blog",
   "main": "app.js",
   "scripts": {
-    "start": "node server",
+    "start": "node server.js",
     "dev": "nodemon -L server",
     "test": "jest",
     "build": "npm install && npm run build"
