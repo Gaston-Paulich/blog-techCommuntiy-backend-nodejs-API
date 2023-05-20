@@ -1,5 +1,7 @@
 // imports
 const express = require('express');
+const mongoose = require("mongoose");
+const { matchedData } = require("express-validator");
 const createErrors = require('http-errors');
 const blogService = require('../services/blog.service');
 const { Blog } = require('../models/blog.model');
@@ -73,7 +75,6 @@ const getBlogList = async(req, res, next) => {
         next(error);
     }
 }
-
 const getSingleBlog = async(req, res, next) => {
     try {
 
@@ -92,6 +93,24 @@ const getSingleBlog = async(req, res, next) => {
         next(error);
     }
 }
+const deleteBlog = async (req, res,next) => {
+    try {
+
+        let searchParams = {_id: req.params.blogId};
+        let selectFields = '';
+
+        let blog = await blogService.readBlogs(searchParams, selectFields);
+        
+        
+
+        await Blog.deleteOne(searchParams, blog);
+        res.send(blog)
+
+    } catch (error) {
+        next(error);
+    }
+  };
+
 
 const reactToBlog = async(req, res, next) => {
     try {
@@ -165,6 +184,7 @@ const deleteComment = async(req, res, next) => {
     createBlog,
     getBlogList,
     getSingleBlog,
+    deleteBlog,
     reactToBlog,
     commentToBlog,
     deleteComment

@@ -55,6 +55,7 @@ router.get('/:bloggerId?/:categoryId?', blogCtrl.getBlogList);
 router.put('/react', verifyAccessToken, blogCtrl.reactToBlog);
 router.post('/comment', verifyAccessToken, blogCtrl.commentToBlog);
 router.delete('/comment', verifyAccessToken, blogCtrl.deleteComment);
+router.delete('/details/:blogId', blogCtrl.deleteBlog);
 
 
 // exports

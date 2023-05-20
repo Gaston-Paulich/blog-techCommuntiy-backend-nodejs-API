@@ -1,5 +1,6 @@
 // imports
 const express = require('express');
+const { matchedData } = require("express-validator");
 const createErrors = require('http-errors');
 const { Blog } = require('../models/blog.model');
 
@@ -48,6 +49,19 @@ const readBlogs = async(
         return Promise.reject(error);
     }
 }
+
+
+const deleteBlog = async (req, res) => {
+    try {
+      
+      const _id = req._id;
+      const data = await Blog.findByIdAndDelete(_id);
+      
+    return Promise.resolve(data);
+    } catch (e) {
+        return Promise.reject(e);
+    }
+  };
 
 const countBlogs = async(countParams) => {
     try {
@@ -143,5 +157,6 @@ module.exports = {
     countBlogs,
     reactBlog,
     postComment,
-    deleteComment
+    deleteComment,
+    deleteBlog
 }

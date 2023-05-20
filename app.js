@@ -19,7 +19,7 @@ app.use(cors({
 
 // routes
 app.get('/', (req, res) => {
-    res.send('Hello heroku');
+    res.send('Hola querido');
 });
 
 app.use('/user', userRoute);
